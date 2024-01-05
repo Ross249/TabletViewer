@@ -1,0 +1,33 @@
+{
+  "cli": {
+    "version": ">= 0.60.0",
+    "promptToConfigurePushNotifications": true
+  },
+  "build": {
+    "dev_client": {
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      },
+      "env": {
+        "ANDROID_SDK_ROOT": "~/android"
+      },
+      "ios": {
+        "simulator": true,
+        "resourceClass": "m-medium"
+      }
+    },
+    "production": {
+      "env": {
+        "ANDROID_SDK_ROOT": "~/android"
+      },
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

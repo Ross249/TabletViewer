@@ -1,23 +1,22 @@
 import { StyleSheet } from "react-native";
-
+import React from "react";
 import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
-import { useToken } from "../../store/AuthStore";
-
-export default function HomeScreen() {
-  const token = useToken();
+const form = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text style={styles.title}>Tab Two</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <Text>{token}</Text>
+      <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
-}
+};
+
+export default form;
 
 const styles = StyleSheet.create({
   container: {
