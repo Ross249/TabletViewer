@@ -1,6 +1,6 @@
 import { useSegments, router, useRootNavigationState } from "expo-router";
 import { useEffect, useLayoutEffect, useMemo } from "react";
-import { useAuthActions, useAuthStore, useToken } from "../store/AuthStore";
+import { useAuthStore, useToken } from "../store/AuthStore";
 
 export function useProtectedRoute() {
   const segments = useSegments();
@@ -14,7 +14,7 @@ export function useProtectedRoute() {
     return rootNavigationState?.key;
   }, [rootNavigationState]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (!navigationKey) {

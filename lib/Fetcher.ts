@@ -1,5 +1,6 @@
 import { createNavigationContainerRef } from "@react-navigation/native";
 import { useAuthStore } from "../store/AuthStore";
+import { router } from "expo-router";
 
 const navigationRef = createNavigationContainerRef();
 
@@ -24,28 +25,27 @@ export async function Fetcher({
   data?: Object;
 }) {
   let response;
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   console.log("------REQ-----");
-  console.log(process.env.API_URL + path);
   console.log(data);
   const headers = {
     Authorization: "Bearer " + AppToken || "",
-    "Content-type": "application/json",
+    "Content-Type": "application/json",
   };
   if (method === "PUT" || method === "POST") {
-    response = await fetch(`${process.env.API_URL}${path}`, {
+    response = await fetch(`${apiUrl}${path}`, {
       headers,
       method,
       body: JSON.stringify(data),
     });
   } else {
-    response = await fetch(`${process.env.API_URL}${path}`, {
+    response = await fetch(`${apiUrl}${path}`, {
       headers,
       method,
     });
   }
 
   if (response.status === 401) {
-    // Toast.show("Please Login")
     throw new Error("Please Login first!");
   }
   if (response.status !== 200) {
@@ -53,10 +53,9 @@ export async function Fetcher({
     throw new Error("Network response was not ok");
   }
   const _json = await response.json();
-  console.log("res");
   // console.log(_json);
-  if (_json.code === 401) navigationRef.navigate("Auth.signin" as never);
-  if (_json.code !== 200) throw new Error(_json.message);
+  if (_json.code === 401) router.replace("/login");
+  if (_json.code !== 1) throw new Error(_json.msg);
   console.log(_json.data);
   return _json.data;
 }

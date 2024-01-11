@@ -1,35 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { WebViewModalProps } from "../types/component";
+import { WebView } from "react-native-webview";
+import { useGlobalSearchParams, useLocalSearchParams } from "expo-router";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+const modal = () => {
+  const params = useLocalSearchParams<WebViewModalProps>();
+  console.log(params);
 
-export default function ModalScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+    <View style={{ flex: 1 }}>
+      <WebView source={{ uri: params.url }} />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+export default modal;
+
+const styles = StyleSheet.create({});

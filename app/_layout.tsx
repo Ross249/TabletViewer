@@ -4,6 +4,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { Providers } from "../lib/Provider";
 import RootLayoutNav from "../navigation/RootLayoutNav";
+import { useAuthStore } from "../store/AuthStore";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -30,7 +31,7 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && useAuthStore.persist.hasHydrated()) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);

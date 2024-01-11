@@ -2,21 +2,45 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthStoreTypes } from "../types/store";
+import { UserInfoData } from "../types/response";
 
 export const useAuthStore = create<AuthStoreTypes>()(
   persist(
     (set, get) => ({
       token: "",
-      actions: {
-        logout: () => {
-          set((state) => ({
-            ...state,
-            token: "",
-          }));
-        },
-        setToken: (n_token?: string) => {
-          set((state) => ({ ...state, token: n_token }));
-        },
+      userInfo: {
+        id: -1,
+        username: "",
+        nickname: "",
+        email: "",
+        mobile: "",
+        avatar: "",
+        group_id: -1,
+        group_name: "",
+      },
+      logout: () => {
+        set((state) => ({
+          ...state,
+          token: "",
+          userInfo: {
+            id: -1,
+            username: "",
+            nickname: "",
+            email: "",
+            mobile: "",
+            avatar: "",
+            group_id: -1,
+            group_name: "",
+          },
+        }));
+      },
+
+      setToken: (n_token?: string) => {
+        set((state) => ({ ...state, token: n_token }));
+      },
+
+      setUserInfo: (n_userInfo: UserInfoData) => {
+        set((state) => ({ ...state, userInfo: n_userInfo }));
       },
     }),
     {
@@ -39,4 +63,4 @@ export const useAuthStore = create<AuthStoreTypes>()(
 );
 
 export const useToken = () => useAuthStore((state) => state.token);
-export const useAuthActions = () => useAuthStore((state) => state.actions);
+export const useUserInfo = () => useAuthStore((state) => state.userInfo);

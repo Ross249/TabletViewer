@@ -1,22 +1,19 @@
 import { StyleSheet } from "react-native";
-import React from "react";
-import EditScreenInfo from "../../components/EditScreenInfo";
-import { Text, View } from "../../components/Themed";
-const form = () => {
+
+import { Text, View } from "../../../components/Themed";
+
+export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>Tab three</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
-};
-
-export default form;
+}
 
 const styles = StyleSheet.create({
   container: {
