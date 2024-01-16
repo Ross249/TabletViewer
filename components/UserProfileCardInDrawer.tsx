@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     alignItems: "center",
     margin: 12,
-    borderRadius: 20,
+    borderRadius: 4,
     overflow: "hidden",
   },
   avatar: {

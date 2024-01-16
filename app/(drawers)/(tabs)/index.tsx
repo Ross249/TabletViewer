@@ -6,36 +6,103 @@ import {
   View,
   useColorScheme,
   Pressable,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  RefreshControl,
 } from "react-native";
 
-import { Text } from "../../../components/Themed";
+import { Text, View as V } from "../../../components/Themed";
 import { useAuthStore, useToken, useUserInfo } from "../../../store/AuthStore";
 import { Link } from "expo-router";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
 import { generalStyles } from "../../../constants/GeneralStyles";
-import { DrawerToggleButton } from "@react-navigation/drawer";
 import CusHeader from "../../../components/CusHeader";
-import Colors from "../../../constants/Colors";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import HomeBanner from "../../../components/HomeBanner";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { TS01ListData } from "../../../types/response";
+import { TsServices } from "../../../services/Ts.service";
+import { useEffect } from "react";
+import TS01Card from "../../../components/TS01Card";
 
 export default function HomeScreen() {
   const theme = useColorScheme();
   const userInfo = useUserInfo();
   const token = useToken();
+  const getTSO1Lists = useInfiniteQuery<TS01ListData>({
+    queryKey: ["TS_01"],
+    queryFn: ({ pageParam }: { pageParam: any }) =>
+      TsServices.get_ts01_list(pageParam),
+    getNextPageParam: (lastPage) => {
+      if (!token) {
+        return false;
+      } else {
+        return lastPage.current_page + 1 > lastPage.total
+          ? false
+          : lastPage.current_page + 1;
+      }
+    },
+    initialPageParam: {
+      page: 1,
+      listRows: 5,
+    },
+    enabled: !!token,
+  });
+
+  const _onMomentumScrollEnd = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const isCloseToBottom =
+      nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
+      nativeEvent.contentSize.height - 30;
+    if (isCloseToBottom) {
+      if (getTSO1Lists.hasNextPage) getTSO1Lists.fetchNextPage().catch();
+    }
+  };
+
+  const refresh = () => {
+    getTSO1Lists.refetch();
+  };
+
+  useEffect(() => {
+    console.log(getTSO1Lists.data?.pages[0].data[0]);
+    console.log("res above");
+  }, [getTSO1Lists]);
 
   return (
     <View style={styles.container}>
       <LinearGradientBackground />
       <CusHeader title="TS-01">
         {userInfo.group_id <= 1 && (
-          <Pressable>
+          <Link
+            href={{
+              pathname: "/create01",
+              params: {
+                tag: "create",
+              },
+            }}
+          >
             <Feather name="plus" size={24} color="black" />
-          </Pressable>
+          </Link>
         )}
       </CusHeader>
-      <ScrollView style={styles.scrol}>
+      <ScrollView
+        style={styles.scrol}
+        onMomentumScrollEnd={_onMomentumScrollEnd}
+        refreshControl={
+          <RefreshControl
+            refreshing={getTSO1Lists.isFetching}
+            onRefresh={refresh}
+          />
+        }
+        contentContainerStyle={{ paddingVertical: 16, gap: 16 }}
+      >
         <HomeBanner />
+        {getTSO1Lists.data?.pages.map((_page_data, i) =>
+          _page_data.data.map((_data, i) => (
+            <TS01Card {..._data} key={_data.id} />
+          ))
+        )}
         <Text>{token}</Text>
         <Link
           href={{

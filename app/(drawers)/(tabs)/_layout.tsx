@@ -34,7 +34,7 @@ export default function TabLayout() {
           title: "TS-02",
           href: "/ts_02",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-file-tray-stacked-outline" color={color} />
+            <TabBarIcon name="albums-outline" color={color} />
           ),
         }}
       />
@@ -44,7 +44,7 @@ export default function TabLayout() {
           title: "TS-03",
           href: "/ts_03",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="person-circle-outline" color={color} />
+            <TabBarIcon name="albums-outline" color={color} />
           ),
         }}
       />
