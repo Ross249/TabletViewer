@@ -49,7 +49,7 @@ export type TS01B = {
   child: string;
   dob: string;
   luggage: string;
-  prepared_by: CrewData[];
+  prepared_by: CrewData;
 
   submitted_at: string;
   arrived_at: string;
@@ -87,6 +87,10 @@ export type TS01AProps = TS01A &
     setVessel: (n: VesselData) => void;
   };
 
+export type TS01BProps = TS01B & {
+  setData: (n: TS01B) => void;
+};
+
 export type ModalProps = {
   show: boolean;
   setShow: (n: boolean) => void;
@@ -107,9 +111,20 @@ export type CusInputProps = {
   value: string;
   title: string;
   onChange: (n: string) => void;
+  rate?: string;
 };
 
 export type DatetimeSelectorProps = Omit<CusInputProps, "onChange"> & {
   type: "date" | "time" | "datetime";
   onChange: (n: Date) => void;
+};
+
+export type PreparedSelectorProps = Omit<CusInputProps, "onChange", "value"> & {
+  onChange: (n: CrewData) => void;
+  value: CrewData;
+};
+
+export type PreparedProps = ModalProps & {
+  data: CrewData;
+  setData: (n: CrewData) => void;
 };

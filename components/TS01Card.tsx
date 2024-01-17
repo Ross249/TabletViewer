@@ -50,33 +50,49 @@ const TS01Card = (props: TS01Data) => {
       {
         // sailing info
       }
-
       <View
         style={{
           ...styles.card_header_container,
           width: "100%",
+          flexDirection: "column",
+          gap: 4,
         }}
       >
-        <View style={{ gap: 4 }}>
+        <View style={styles.card_row_container}>
           <Text style={{ ...styles.card_commute_text, fontWeight: "bold" }}>
             FROM
           </Text>
-          <Text style={styles.card_commute_text}>{props.starting_place}</Text>
-          <Text style={{ ...styles.card_commute_text, fontSize: 12 }}>
-            {props.departure_time_text}
-          </Text>
-        </View>
-        <View
-          style={{
-            alignItems: "center",
-            flex: 1,
-            gap: 4,
-          }}
-        >
-          <Text style={{ fontSize: 16, textAlign: "center" }}>
+          <Text
+            style={{
+              width: "100%",
+              fontSize: 16,
+              textAlign: "center",
+              position: "absolute",
+            }}
+          >
             {props.departure_date}
           </Text>
-          <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              ...styles.card_commute_text,
+              textAlign: "right",
+              fontWeight: "bold",
+            }}
+          >
+            To
+          </Text>
+        </View>
+
+        <View style={styles.card_row_container}>
+          <Text style={styles.card_commute_text}>{props.starting_place}</Text>
+          <View
+            style={{
+              alignItems: "center",
+              position: "absolute",
+              width: "100%",
+              justifyContent: "center",
+            }}
+          >
             <Ionicons
               name="boat-outline"
               size={28}
@@ -87,28 +103,28 @@ const TS01Card = (props: TS01Data) => {
               style={{
                 position: "absolute",
                 height: 2,
-                width: "60%",
+                width: 240,
                 top: 12,
               }}
               lightColor={Colors["light"].tabIconDefault}
               darkColor={Colors["dark"].tabIconDefault}
             ></V>
           </View>
-          <Text style={{ fontSize: 16 }}>{props.trip_designation}</Text>
-        </View>
-        <View style={{ gap: 4 }}>
-          <Text
-            style={{
-              ...styles.card_commute_text,
-              textAlign: "right",
-              fontWeight: "bold",
-            }}
-          >
-            To
-          </Text>
           <Text style={{ ...styles.card_commute_text, textAlign: "right" }}>
             {props.ending_place}
           </Text>
+        </View>
+
+        <View style={styles.card_row_container}>
+          <Text
+            style={{
+              ...styles.card_commute_text,
+              fontSize: 12,
+            }}
+          >
+            {props.departure_time_text}
+          </Text>
+          <Text style={{ fontSize: 16 }}>{props.trip_designation}</Text>
           <Text
             style={{
               ...styles.card_commute_text,
@@ -120,6 +136,7 @@ const TS01Card = (props: TS01Data) => {
           </Text>
         </View>
       </View>
+
       <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 4 }}>
         {props.duration}
       </Text>
@@ -343,5 +360,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: "wrap",
     gap: 8,
+  },
+  card_row_container: {
+    flex: 1,
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });

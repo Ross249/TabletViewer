@@ -1,17 +1,21 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import { Text as T } from "./Themed";
 import Colors from "../constants/Colors";
-import { CusInputProps } from "../types/component";
+import { PreparedSelectorProps } from "../types/component";
+import PreparedByModal from "./PreparedByModal";
 
-const CusInput: React.FC<CusInputProps> = (props) => {
+const PreparedBySelector: React.FC<PreparedSelectorProps> = (props) => {
+  const [show, setShow] = useState(false);
+
   return (
-    <View
+    <Pressable
       style={{
         width: "49%",
         flexDirection: "row",
         justifyContent: "space-between",
       }}
+      onPress={() => setShow(true)}
     >
       <View
         style={{
@@ -24,9 +28,7 @@ const CusInput: React.FC<CusInputProps> = (props) => {
         <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
         <T style={{ fontSize: 16, marginRight: 4 }}>:</T>
       </View>
-      <TextInput
-        value={props.value}
-        onChangeText={props.onChange}
+      <View
         style={{
           flex: 1,
           position: "relative",
@@ -34,25 +36,23 @@ const CusInput: React.FC<CusInputProps> = (props) => {
           paddingHorizontal: 8,
           paddingVertical: 2,
           backgroundColor: Colors["dark"].text_second,
+          justifyContent: "center",
         }}
-      />
-      {!!props.rate && (
-        <Text
-          style={{
-            fontSize: 10,
-            textAlign: "right",
-            position: "absolute",
-            right: 0,
-            bottom: -12,
-          }}
-        >
-          {props.rate}
-        </Text>
-      )}
-    </View>
+      >
+        <T>{!!props.value ? props.value.username : "Select Crew"}</T>
+      </View>
+      <View style={{ position: "absolute" }}>
+        <PreparedByModal
+          show={show}
+          setShow={setShow}
+          data={props.values}
+          setData={props.onChange}
+        />
+      </View>
+    </Pressable>
   );
 };
 
-export default CusInput;
+export default PreparedBySelector;
 
 const styles = StyleSheet.create({});

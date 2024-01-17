@@ -1,5 +1,5 @@
 import { Fetcher } from "../lib/Fetcher";
-import { PaginationData } from "../types/request";
+import { CreateTS01Data, PaginationData } from "../types/request";
 
 export const TsServices = {
   get_ts01_list: async (data: PaginationData) =>
@@ -24,5 +24,11 @@ export const TsServices = {
     await Fetcher({
       method: "GET",
       path: "/api/Boat/index",
+    }),
+  createTS01: async (data: CreateTS01Data) =>
+    await Fetcher({
+      method: "POST",
+      path: "/api/Ts01/create",
+      data: data,
     }),
 };

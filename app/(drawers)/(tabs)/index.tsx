@@ -13,7 +13,7 @@ import {
 
 import { Text, View as V } from "../../../components/Themed";
 import { useAuthStore, useToken, useUserInfo } from "../../../store/AuthStore";
-import { Link } from "expo-router";
+import { Link, useFocusEffect } from "expo-router";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
 import { generalStyles } from "../../../constants/GeneralStyles";
 import CusHeader from "../../../components/CusHeader";
@@ -22,7 +22,7 @@ import HomeBanner from "../../../components/HomeBanner";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { TS01ListData } from "../../../types/response";
 import { TsServices } from "../../../services/Ts.service";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import TS01Card from "../../../components/TS01Card";
 
 export default function HomeScreen() {
@@ -64,10 +64,11 @@ export default function HomeScreen() {
     getTSO1Lists.refetch();
   };
 
-  useEffect(() => {
-    console.log(getTSO1Lists.data?.pages[0].data[0]);
-    console.log("res above");
-  }, [getTSO1Lists]);
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
