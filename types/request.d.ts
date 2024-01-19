@@ -9,9 +9,11 @@ export type PaginationData = {
 };
 
 export type CreateTS01Data = {
+  starting_place_id: string;
   starting_place: string;
+  ending_place_id: string;
   ending_place: string;
-  boat_id: string;
+  boat_name: string;
   departure_date: string;
   departure_time: string;
   estimated_achieve_time: string;
@@ -35,4 +37,8 @@ export type CreateTS01Data = {
   prepared_by_id: string;
   generate_time: string;
   achieve_time: string;
+  remark: string;
+  delay_departure_code: string;
 };
+
+export type UpdateTS01Data = CreateTS01Data & { id: string };

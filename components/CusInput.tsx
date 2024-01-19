@@ -22,7 +22,7 @@ const CusInput: React.FC<CusInputProps> = (props) => {
         }}
       >
         <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
-        <T style={{ fontSize: 16, marginRight: 4 }}>:</T>
+        <T style={{ fontSize: 16, marginHorizontal: 4 }}>:</T>
       </View>
       <TextInput
         value={props.value}

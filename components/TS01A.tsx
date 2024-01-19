@@ -83,28 +83,6 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
             </T>
           </Pressable>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 8,
-          }}
-        >
-          <T style={{ fontSize: 24, fontWeight: "bold" }}>Vessel:</T>
-          <Pressable
-            style={{
-              ...styles.press_container,
-              backgroundColor: Colors[theme ?? "light"].text_second,
-            }}
-            onPress={() => {
-              setVesselModal(true);
-            }}
-          >
-            <T style={styles.font}>
-              {props.vessel.id === 0 ? "Choose" : props.vessel.name}
-            </T>
-          </Pressable>
-        </View>
       </View>
       <View
         style={{
@@ -140,7 +118,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
             props.setData((prev: TS01A) => {
               return {
                 ...(prev as TS01A),
-                departure_time: moment(date).format("YYYY-MM-DD HH:mm:ss"),
+                departure_time: moment(date).format("HH:mm"),
               };
             });
           }}
@@ -148,16 +126,14 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
 
         <DatetimeSelector
           title="Estimated Arrive Time"
-          type="datetime"
+          type="time"
           value={props.estimated_arrive_time}
           onChange={(date) => {
             // @ts-ignore
             props.setData((prev: TS01A) => {
               return {
                 ...(prev as TS01A),
-                estimated_arrive_time: moment(date).format(
-                  "YYYY-MM-DD HH:mm:ss"
-                ),
+                estimated_arrive_time: moment(date).format("HH:mm"),
               };
             });
           }}
@@ -251,12 +227,6 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           to: props.to,
         }}
         setRoute={props.setRoute}
-      />
-      <OneWaySelector
-        show={vesselModal}
-        setShow={setVesselModal}
-        data={props.vessel}
-        setData={props.setVessel}
       />
     </View>
   );

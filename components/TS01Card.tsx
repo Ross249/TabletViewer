@@ -13,8 +13,9 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { View as V, Text as T } from "./Themed";
 import { Link } from "expo-router";
+import Tag from "./Tag";
 
-const TS01Card = (props: TS01Data) => {
+const TS01Card: React.FC<TS01Data> = (props) => {
   const theme = useColorScheme();
   return (
     <BlurView
@@ -37,6 +38,7 @@ const TS01Card = (props: TS01Data) => {
             pathname: "/create01",
             params: {
               tag: "edit",
+              ...props,
             },
           }}
         >
@@ -145,50 +147,14 @@ const TS01Card = (props: TS01Data) => {
       }
       <View style={styles.info_gap}>
         <View style={styles.tag_wrap}>
-          {props.dob.length > 0 && (
-            <View
-              style={{
-                ...styles.tag_container,
-                backgroundColor: Colors[theme ?? "light"].tint,
-              }}
-            >
-              <T style={styles.tag_text}>DOB: </T>
-              <T style={styles.tag_text}>{props.dob}</T>
-            </View>
-          )}
+          {props.dob.length > 0 && <Tag title="DOB: " value={props.dob} />}
 
           {props.luggage.length > 0 && (
-            <View
-              style={{
-                ...styles.tag_container,
-                backgroundColor: Colors[theme ?? "light"].tint,
-              }}
-            >
-              <T style={styles.tag_text}>Luggage: </T>
-              <T style={styles.tag_text}>{props.luggage}</T>
-            </View>
+            <Tag title="Luggage: " value={props.luggage} />
           )}
-          {props.baby.length > 0 && (
-            <View
-              style={{
-                ...styles.tag_container,
-                backgroundColor: Colors[theme ?? "light"].tint,
-              }}
-            >
-              <T style={styles.tag_text}>Infant: </T>
-              <T style={styles.tag_text}>{props.baby}</T>
-            </View>
-          )}
+          {props.baby.length > 0 && <Tag title="Infant: " value={props.baby} />}
           {props.child.length > 0 && (
-            <View
-              style={{
-                ...styles.tag_container,
-                backgroundColor: Colors[theme ?? "light"].tint,
-              }}
-            >
-              <T style={styles.tag_text}>Child: </T>
-              <T style={styles.tag_text}>{props.child}</T>
-            </View>
+            <Tag title="Child: " value={props.child} />
           )}
         </View>
         <View style={styles.info_gap}>
@@ -198,7 +164,7 @@ const TS01Card = (props: TS01Data) => {
             props.super_class.length > 0 ||
             props.economy_class.length > 0) && (
             <T style={{ fontSize: 16, fontWeight: "bold" }}>
-              No. of Pax./ Complimentary/ Loading Rate:
+              No. of Pax./ Complimentary:
             </T>
           )}
           <View style={styles.tag_wrap}>
@@ -210,13 +176,7 @@ const TS01Card = (props: TS01Data) => {
                 }}
               >
                 <T style={styles.tag_text}>Total: </T>
-                <T style={styles.tag_text}>
-                  {props.total_pax}
-                  {!!props.total_pax_attendance &&
-                  props.total_pax_attendance.length > 0
-                    ? "/ " + props.total_pax_attendance
-                    : ""}
-                </T>
+                <T style={styles.tag_text}>{props.total_pax}</T>
               </View>
             )}
             {props.vip_cabin.length > 0 && (
@@ -231,10 +191,6 @@ const TS01Card = (props: TS01Data) => {
                   {props.vip_cabin}
                   {props.vip_cabin_complimentary.length > 0
                     ? "/ " + props.vip_cabin_complimentary
-                    : ""}
-                  {!!props.vip_cabin_attendance &&
-                  props.vip_cabin_attendance.length > 0
-                    ? "/ " + props.vip_cabin_attendance
                     : ""}
                 </T>
               </View>
@@ -253,10 +209,6 @@ const TS01Card = (props: TS01Data) => {
                   {props.premier_grand_complimentary.length > 0
                     ? "/ " + props.premier_grand_complimentary
                     : ""}
-                  {!!props.premier_grand_attendance &&
-                  props.premier_grand_attendance.length > 0
-                    ? "/ " + props.premier_grand_attendance
-                    : ""}
                 </T>
               </View>
             )}
@@ -273,10 +225,6 @@ const TS01Card = (props: TS01Data) => {
                   {props.super_class_complimentary.length > 0
                     ? "/ " + props.super_class_complimentary
                     : ""}
-                  {!!props.super_class_attendance &&
-                  props.super_class_attendance.length > 0
-                    ? "/ " + props.super_class_attendance
-                    : ""}
                 </T>
               </View>
             )}
@@ -292,10 +240,6 @@ const TS01Card = (props: TS01Data) => {
                   {props.economy_class}{" "}
                   {props.economy_class_complimentary.length > 0
                     ? "/ " + props.economy_class_complimentary
-                    : ""}
-                  {!!props.economy_class_attendance &&
-                  props.economy_class_attendance.length > 0
-                    ? "/ " + props.economy_class_attendance
                     : ""}
                 </T>
               </View>

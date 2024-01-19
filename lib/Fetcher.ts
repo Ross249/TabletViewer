@@ -44,17 +44,19 @@ export async function Fetcher({
       method,
     });
   }
-
   if (response.status === 401) {
+    useAuthStore.setState({ token: "" });
     throw new Error("Please Login first!");
   }
   if (response.status !== 200) {
-    // console.log(await response.text());
     throw new Error("Network response was not ok");
   }
   const _json = await response.json();
   console.log(_json);
-  if (_json.code === 401) router.replace("/login");
+  if (_json.code === 401) {
+    useAuthStore.setState({ token: "" });
+    router.replace("/login");
+  }
   if (_json.code !== 1) throw new Error(_json.msg);
   console.log(_json.data);
   return _json.data;

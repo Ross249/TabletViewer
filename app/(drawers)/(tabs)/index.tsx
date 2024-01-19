@@ -13,7 +13,7 @@ import {
 
 import { Text, View as V } from "../../../components/Themed";
 import { useAuthStore, useToken, useUserInfo } from "../../../store/AuthStore";
-import { Link, useFocusEffect } from "expo-router";
+import { Link } from "expo-router";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
 import { generalStyles } from "../../../constants/GeneralStyles";
 import CusHeader from "../../../components/CusHeader";
@@ -31,9 +31,12 @@ export default function HomeScreen() {
   const token = useToken();
   const getTSO1Lists = useInfiniteQuery<TS01ListData>({
     queryKey: ["TS_01"],
-    queryFn: ({ pageParam }: { pageParam: any }) =>
-      TsServices.get_ts01_list(pageParam),
-    getNextPageParam: (lastPage) => {
+    queryFn: ({ pageParam }) => TsServices.get_ts01_list(pageParam as number),
+    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+      console.log(
+        `lastPage: ${lastPage?.current_page} allPages: ${allPages?.length} lastPageParam: ${lastPageParam} allPageParams: ${allPageParams.length}`
+      );
+
       if (!token) {
         return false;
       } else {
@@ -42,10 +45,8 @@ export default function HomeScreen() {
           : lastPage.current_page + 1;
       }
     },
-    initialPageParam: {
-      page: 1,
-      listRows: 5,
-    },
+    refetchOnWindowFocus: true,
+    initialPageParam: 1,
     enabled: !!token,
   });
 
@@ -56,19 +57,13 @@ export default function HomeScreen() {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (getTSO1Lists.hasNextPage) getTSO1Lists.fetchNextPage().catch();
+      if (getTSO1Lists.hasNextPage) getTSO1Lists.fetchNextPage();
     }
   };
 
   const refresh = () => {
     getTSO1Lists.refetch();
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      refresh();
-    }, [])
-  );
 
   return (
     <View style={styles.container}>
@@ -105,16 +100,6 @@ export default function HomeScreen() {
           ))
         )}
         <Text>{token}</Text>
-        <Link
-          href={{
-            pathname: "/modal",
-            params: {
-              url: `${process.env.EXPO_PUBLIC_API_URL}/privacy-policy.html`,
-            },
-          }}
-        >
-          dsas
-        </Link>
       </ScrollView>
     </View>
   );

@@ -12,7 +12,7 @@ const LinearGradientBackground = () => {
           ? ["rgba(255,98,98,1)", "rgba(255,192,203,1)", "rgba(255,255,255,1)"]
           : ["rgba(179,0,0,1)", "rgba(102,0,0,1)", "rgba(0,0,0,1)"]
       }
-      locations={[0, 0.2, 0.45]}
+      locations={[0, 0.5, 0.8]}
     />
   );
 };

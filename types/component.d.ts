@@ -53,6 +53,9 @@ export type TS01B = {
 
   submitted_at: string;
   arrived_at: string;
+
+  delay_departure_code: string;
+  remarks: string;
 };
 
 export type CrewData = {
@@ -83,8 +86,6 @@ export type TS01AProps = TS01A &
   RouteData & {
     setRoute: (n: RouteData) => void;
     setData: (n: TS01A) => void;
-    vessel: VesselData;
-    setVessel: (n: VesselData) => void;
   };
 
 export type TS01BProps = TS01B & {
@@ -127,4 +128,9 @@ export type PreparedSelectorProps = Omit<CusInputProps, "onChange", "value"> & {
 export type PreparedProps = ModalProps & {
   data: CrewData;
   setData: (n: CrewData) => void;
+};
+
+export type TagProps = {
+  title: string;
+  value: string | number;
 };

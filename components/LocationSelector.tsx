@@ -166,5 +166,7 @@ const styles = StyleSheet.create({
   },
   card_font: {
     fontSize: 16,
+    flexWrap: "wrap",
+    maxWidth: "80%",
   },
 });

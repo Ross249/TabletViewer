@@ -208,14 +208,14 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
 
         <DatetimeSelector
           title="Arrive Time"
-          type="datetime"
+          type="time"
           value={props.arrived_at}
           onChange={(date) => {
             // @ts-ignore
             props.setData((prev: TS01B) => {
               return {
                 ...(prev as TS01B),
-                arrived_at: moment(date).format("YYYY-MM-DD HH:mm:ss"),
+                arrived_at: moment(date).format("HH:mm"),
               };
             });
           }}
@@ -223,14 +223,14 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
 
         <DatetimeSelector
           title="Submit Time"
-          type="datetime"
+          type="time"
           value={props.submitted_at}
           onChange={(date) => {
             // @ts-ignore
             props.setData((prev: TS01B) => {
               return {
                 ...(prev as TS01B),
-                submitted_at: moment(date).format("YYYY-MM-DD HH:mm:ss"),
+                submitted_at: moment(date).format("HH:mm"),
               };
             });
           }}
@@ -247,6 +247,32 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
+        />
+        <CusInput
+          value={props.remarks}
+          onChange={(text) => {
+            // @ts-ignore
+            props.setData((prev: TS01B) => {
+              return {
+                ...(prev as TS01B),
+                remarks: text,
+              };
+            });
+          }}
+          title={"Remarks"}
+        />
+        <CusInput
+          value={props.delay_departure_code}
+          onChange={(text) => {
+            // @ts-ignore
+            props.setData((prev: TS01B) => {
+              return {
+                ...(prev as TS01B),
+                delay_departure_code: text,
+              };
+            });
+          }}
+          title={"Delay Departure Code"}
         />
       </View>
     </View>

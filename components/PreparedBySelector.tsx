@@ -39,7 +39,7 @@ const PreparedBySelector: React.FC<PreparedSelectorProps> = (props) => {
           justifyContent: "center",
         }}
       >
-        <T>{!!props.value ? props.value.username : "Select Crew"}</T>
+        <T>{!!props.value.username ? props.value.username : "Select Crew"}</T>
       </View>
       <View style={{ position: "absolute" }}>
         <PreparedByModal
