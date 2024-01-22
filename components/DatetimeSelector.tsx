@@ -4,40 +4,47 @@ import Colors from "../constants/Colors";
 import { Text as T } from "./Themed";
 import { DatetimeSelectorProps } from "../types/component";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useUserInfo } from "../store/AuthStore";
 
 const DatetimeSelector: React.FC<DatetimeSelectorProps> = (props) => {
   const [show, setShow] = useState(false);
+  const userInfo = useUserInfo();
   useEffect(() => {
     setShow(false);
   }, [props.value]);
 
   return (
     <Pressable
+      disabled={userInfo.group_id > 1}
       style={{
-        width: "49%",
+        width: props.title.length > 0 ? "49%" : "100%",
         flexDirection: "row",
         justifyContent: "space-between",
       }}
       onPress={() => setShow(true)}
     >
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
-        <T style={{ fontSize: 16, marginRight: 4 }}>:</T>
-      </View>
+      {props.title.length > 0 && (
+        <View
+          style={{
+            flex: props.title.length === 0 ? 0 : 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
+          {props.title.length > 0 && (
+            <T style={{ fontSize: 16, marginRight: 4 }}>:</T>
+          )}
+        </View>
+      )}
       <View
         style={{
           flex: 1,
           position: "relative",
           borderRadius: 4,
-          paddingHorizontal: 8,
-          paddingVertical: 2,
+          paddingHorizontal: 12,
+          paddingVertical: 8,
           backgroundColor: Colors["dark"].text_second,
           justifyContent: "center",
         }}

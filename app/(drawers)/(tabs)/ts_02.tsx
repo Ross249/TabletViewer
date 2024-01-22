@@ -1,15 +1,178 @@
-import { StyleSheet } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  ScrollView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  RefreshControl,
+  useColorScheme,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
 import { Text, View } from "../../../components/Themed";
+import { FilterFormData } from "../../../types/component";
+import LinearGradientBackground from "../../../components/LinearGradientBackground";
+import FilterFormHeader from "../../../components/FilterFormHeader";
+import CusHeader from "../../../components/CusHeader";
+import { generalStyles } from "../../../constants/GeneralStyles";
+import { useToken } from "../../../store/AuthStore";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { TsServices } from "../../../services/Ts.service";
+import Colors from "../../../constants/Colors";
+import { TS02ListData } from "../../../types/response";
 const form = () => {
+  const theme = useColorScheme();
+  const [loading, setLoading] = useState(false);
+  const token = useToken();
+  const [filterForm, setFilterForm] = useState<FilterFormData>({
+    departure_date: "",
+    trip_designation: "",
+    from: {
+      id: 0,
+      name: "",
+      name_en: "",
+    },
+    to: {
+      id: 0,
+      name: "",
+      name_en: "",
+    },
+  });
+  const get_or_search_ts02 = useInfiniteQuery<TS02ListData>({
+    queryKey: [
+      "get_or_search",
+      filterForm.departure_date,
+      filterForm.trip_designation,
+      filterForm.from.id,
+      filterForm.to.id,
+    ],
+    queryFn: ({ pageParam }) =>
+      TsServices.getOrSearchTS02({
+        page: pageParam as number,
+        starting_place: filterForm.from.name_en,
+        ending_place: filterForm.to.name_en,
+        trip_designation: filterForm.trip_designation,
+        departure_date: filterForm.departure_date,
+      }),
+    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
+      console.log(
+        `lastPage: ${lastPage?.current_page} allPages: ${allPages?.length} lastPageParam: ${lastPageParam} allPageParams: ${allPageParams.length}`
+      );
+
+      if (!token) {
+        return false;
+      } else {
+        return lastPage.current_page + 1 > lastPage.total
+          ? false
+          : lastPage.current_page + 1;
+      }
+    },
+    refetchOnWindowFocus: true,
+    initialPageParam: 1,
+    enabled: !!token,
+  });
+
+  const _onMomentumScrollEnd = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const isCloseToBottom =
+      nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
+      nativeEvent.contentSize.height - 30;
+    if (isCloseToBottom) {
+      if (get_or_search_ts02.hasNextPage) get_or_search_ts02.fetchNextPage();
+    }
+  };
+
+  const refresh = () => {
+    get_or_search_ts02.refetch();
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
+      <LinearGradientBackground />
+      <CusHeader title="TS-02"></CusHeader>
+      <ScrollView
+        style={styles.scrol}
+        onMomentumScrollEnd={_onMomentumScrollEnd}
+        refreshControl={
+          <RefreshControl
+            refreshing={get_or_search_ts02.isFetching}
+            onRefresh={refresh}
+          />
+        }
+        contentContainerStyle={{ paddingVertical: 16, gap: 16 }}
+      >
+        <FilterFormHeader {...filterForm} setData={setFilterForm} />
+        <ScrollView
+          horizontal
+          style={{
+            borderRadius: 4,
+            borderColor: "rgba(0,0,0,0.1)",
+            backgroundColor: Colors[theme ?? "light"].background,
+            borderWidth: 1,
+          }}
+          contentContainerStyle={{
+            width: 14 * 60,
+            flexWrap: "wrap",
+            padding: 8,
+          }}
+        >
+          <View style={styles.table_head}>
+            <Text style={styles.table_head_text}>Date</Text>
+            <Text style={styles.table_head_text}>Starting Place</Text>
+            <Text style={styles.table_head_text}>Ending Place</Text>
+            <Text style={styles.table_head_text}>Total Flight</Text>
+            <Text style={styles.table_head_text}>E</Text>
+            <Text style={styles.table_head_text}>SC</Text>
+            <Text style={styles.table_head_text}>PG</Text>
+            <Text style={styles.table_head_text}>VIP</Text>
+            <Text style={styles.table_head_text}>Total PAX</Text>
+            <Text style={styles.table_head_text}>Crew</Text>
+            <Text style={styles.table_head_text}>Generated Time</Text>
+            <Text style={styles.table_head_text}>Operate</Text>
+          </View>
+          {get_or_search_ts02.isSuccess &&
+            get_or_search_ts02.data.pages.map((_item, i) =>
+              _item.data.map((value, i) => (
+                <View
+                  style={{
+                    ...styles.table_head,
+                    borderTopColor: "rgba(0,0,0,0.2)",
+                    borderTopWidth: 1,
+                  }}
+                  key={value.id}
+                >
+                  <Text style={styles.table_text}>{value.date}</Text>
+                  <Text style={styles.table_text}>{value.starting_place}</Text>
+                  <Text style={styles.table_text}>{value.ending_place}</Text>
+                  <Text style={styles.table_text}>
+                    {value.number_of_flights}
+                  </Text>
+                  <Text style={styles.table_text}>{value.economy_class}</Text>
+                  <Text style={styles.table_text}>{value.super_class}</Text>
+                  <Text style={styles.table_text}>{value.premier_grand}</Text>
+                  <Text style={styles.table_text}>{value.vip_cabin}</Text>
+                  <Text style={styles.table_text}>{value.total_pax}</Text>
+                  <Text style={styles.table_text}>{value.crew}</Text>
+                  <Text style={styles.table_text}>
+                    {value.generate_time_text}
+                  </Text>
+                  <Text
+                    style={{
+                      ...styles.table_text,
+                      textAlign: "center",
+                      padding: 8,
+                      color: "white",
+                      borderRadius: 8,
+                      backgroundColor: Colors[theme ?? "light"].tint,
+                    }}
+                  >
+                    Detail
+                  </Text>
+                </View>
+              ))
+            )}
+        </ScrollView>
+      </ScrollView>
     </View>
   );
 };
@@ -26,9 +189,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  scrol: {
+    marginVertical: 16,
+    width: "100%",
+    paddingHorizontal: generalStyles.paddingHorizontal,
+  },
+  table_head: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  table_head_text: {
+    width: 60,
+    flexWrap: "wrap",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  table_text: {
+    width: 60,
+    flexWrap: "wrap",
+    fontSize: 16,
   },
 });

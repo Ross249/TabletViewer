@@ -69,3 +69,27 @@ export type TS01Data = {
   departure_time_text: string; //開航時間
   estimated_achieve_time_text: string; //预计达到时间
 };
+
+export type TS02ListData = {
+  total: number;
+  per_page: string;
+  current_page: number;
+  last_page: number;
+  data: TS02GeneralData[];
+};
+
+export type TS02GeneralData = {
+  crew: number;
+  date: string;
+  departure_time_text: string;
+  economy_class: number;
+  ending_place: string;
+  generate_time_text: string;
+  id: number;
+  number_of_flights: number;
+  premier_grand: number;
+  starting_place: string;
+  super_class: number;
+  total_pax: number;
+  vip_cabin: number;
+};

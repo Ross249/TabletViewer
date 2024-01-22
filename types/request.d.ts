@@ -42,3 +42,10 @@ export type CreateTS01Data = {
 };
 
 export type UpdateTS01Data = CreateTS01Data & { id: string };
+
+export type FilterTS02Data = {
+  starting_place: string;
+  ending_place: string;
+  departure_date: string;
+  trip_designation: string;
+};

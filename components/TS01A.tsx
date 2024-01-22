@@ -24,12 +24,14 @@ import moment from "moment";
 import { useQuery } from "@tanstack/react-query";
 import { TsServices } from "../services/Ts.service";
 import OneWaySelector from "./OneWaySelector";
+import { useUserInfo } from "../store/AuthStore";
 
 const TS01FormA: React.FC<TS01AProps> = (props) => {
   const theme = useColorScheme();
   const [locationModal, setLocationModal] = useState(false);
   const tag = useRef<"from" | "to">("from");
   const [vesselModal, setVesselModal] = useState(false);
+  const userInfo = useUserInfo();
 
   return (
     <View>
@@ -50,6 +52,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
         >
           <T style={{ fontSize: 24, fontWeight: "bold" }}>Route:</T>
           <Pressable
+            disabled={userInfo.group_id > 1}
             style={{
               ...styles.press_container,
               backgroundColor: Colors[theme ?? "light"].text_second,
@@ -70,6 +73,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
             style={{ marginHorizontal: 8 }}
           />
           <Pressable
+            disabled={userInfo.group_id > 1}
             style={{
               ...styles.press_container,
               backgroundColor: Colors[theme ?? "light"].text_second,
@@ -95,6 +99,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
         }}
       >
         <DatetimeSelector
+          disable={userInfo.group_id > 1}
           title="Departure Date"
           type="date"
           value={props.departure_date}
@@ -110,6 +115,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
         />
 
         <DatetimeSelector
+          disable={userInfo.group_id > 1}
           title="Departure Time"
           type="time"
           value={props.departure_time}
@@ -125,6 +131,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
         />
 
         <DatetimeSelector
+          disable={userInfo.group_id > 1}
           title="Estimated Arrive Time"
           type="time"
           value={props.estimated_arrive_time}
@@ -140,6 +147,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
         />
 
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.vessel_name}
           onChange={(text) => {
             // @ts-ignore
@@ -153,6 +161,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           title="Vessel Name"
         />
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.tripe_designation}
           onChange={(text) => {
             // @ts-ignore
@@ -166,6 +175,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           title="Trip Designation"
         />
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.number_of_crew}
           onChange={(text) => {
             // @ts-ignore
@@ -179,6 +189,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           title="No. of Crew"
         />
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.number_of_crew_for_relieving}
           onChange={(text) => {
             // @ts-ignore
@@ -192,6 +203,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           title="No. of Crew for Relieving/ Training"
         />
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.total_number_of_crew}
           onChange={(text) => {
             // @ts-ignore
@@ -205,6 +217,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           title="Total No. of Crew"
         />
         <CusInput
+          disable={userInfo.group_id > 1}
           value={props.number_of_group_pax}
           onChange={(text) => {
             // @ts-ignore

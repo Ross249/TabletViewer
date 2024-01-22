@@ -20,6 +20,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         }}
       >
         <CusInput
+          disable={false}
           value={props.vip_cabin}
           onChange={(text) => {
             // @ts-ignore
@@ -34,6 +35,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           rate={props.vip_cabin_rate}
         />
         <CusInput
+          disable={false}
           value={props.vip_cabin_complimentary}
           onChange={(text) => {
             // @ts-ignore
@@ -49,6 +51,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.premier_grand}
           onChange={(text) => {
             // @ts-ignore
@@ -64,6 +67,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.premier_grand_complimentary}
           onChange={(text) => {
             // @ts-ignore
@@ -79,6 +83,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.super_class}
           onChange={(text) => {
             // @ts-ignore
@@ -93,6 +98,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           rate={props.super_class_rate}
         />
         <CusInput
+          disable={false}
           value={props.super_class_complimentary}
           onChange={(text) => {
             // @ts-ignore
@@ -108,6 +114,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.economy_class}
           onChange={(text) => {
             // @ts-ignore
@@ -123,6 +130,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.economy_class_complimentary}
           onChange={(text) => {
             // @ts-ignore
@@ -138,6 +146,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.total_pax}
           onChange={(text) => {
             // @ts-ignore
@@ -152,6 +161,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.infant}
           onChange={(text) => {
             // @ts-ignore
@@ -166,6 +176,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.child}
           onChange={(text) => {
             // @ts-ignore
@@ -179,6 +190,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           title={"Child"}
         />
         <CusInput
+          disable={false}
           value={props.dob}
           onChange={(text) => {
             // @ts-ignore
@@ -193,6 +205,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <CusInput
+          disable={false}
           value={props.luggage}
           onChange={(text) => {
             // @ts-ignore
@@ -207,6 +220,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <DatetimeSelector
+          disable={false}
           title="Arrive Time"
           type="time"
           value={props.arrived_at}
@@ -222,6 +236,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
         />
 
         <DatetimeSelector
+          disable={false}
           title="Submit Time"
           type="time"
           value={props.submitted_at}
@@ -249,6 +264,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           }}
         />
         <CusInput
+          disable={false}
           value={props.remarks}
           onChange={(text) => {
             // @ts-ignore
@@ -262,6 +278,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           title={"Remarks"}
         />
         <CusInput
+          disable={false}
           value={props.delay_departure_code}
           onChange={(text) => {
             // @ts-ignore

@@ -109,6 +109,7 @@ export type OneWayModalProps = ModalProps & {
 };
 
 export type CusInputProps = {
+  disable: boolean;
   value: string;
   title: string;
   onChange: (n: string) => void;
@@ -133,4 +134,13 @@ export type PreparedProps = ModalProps & {
 export type TagProps = {
   title: string;
   value: string | number;
+};
+
+export type FilterFormData = RouteData & {
+  trip_designation: string;
+  departure_date: string;
+};
+
+export type FilterFormProps = FilterFormData & {
+  setData: (n: FilterFormData) => void;
 };

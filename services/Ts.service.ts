@@ -1,6 +1,7 @@
 import { Fetcher } from "../lib/Fetcher";
 import {
   CreateTS01Data,
+  FilterTS02Data,
   PaginationData,
   UpdateTS01Data,
 } from "../types/request";
@@ -42,5 +43,11 @@ export const TsServices = {
       method: "POST",
       path: "/api/Ts01/update",
       data: data,
+    }),
+
+  getOrSearchTS02: async (data: FilterTS02Data & { page: number }) =>
+    await Fetcher({
+      method: "GET",
+      path: `/api/Ts02/index?starting_place=${data.starting_place}&ending_place=${data.ending_place}&departure_date=${data.departure_date}&trip_designation=${data.trip_designation}&page=${data.page}&listRows=10`,
     }),
 };

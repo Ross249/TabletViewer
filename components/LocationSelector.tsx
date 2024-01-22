@@ -38,9 +38,29 @@ const LocationSelector: React.FC<LocationModalProps> = (props) => {
               to: selected,
             }
       );
-      setSelected(undefined);
-      props.setShow(false);
+    } else {
+      props.setRoute(
+        props.tag === "from"
+          ? {
+              ...props.route,
+              from: {
+                id: 0,
+                name: "",
+                name_en: "",
+              },
+            }
+          : {
+              ...props.route,
+              to: {
+                id: 0,
+                name: "",
+                name_en: "",
+              },
+            }
+      );
     }
+    setSelected(undefined);
+    props.setShow(false);
   };
 
   return (

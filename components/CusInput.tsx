@@ -8,24 +8,29 @@ const CusInput: React.FC<CusInputProps> = (props) => {
   return (
     <View
       style={{
-        width: "49%",
+        width: props.title.length > 0 ? "49%" : "100%",
         flexDirection: "row",
         justifyContent: "space-between",
       }}
     >
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
-        <T style={{ fontSize: 16, marginHorizontal: 4 }}>:</T>
-      </View>
+      {props.title.length > 0 && (
+        <View
+          style={{
+            flex: props.title.length === 0 ? 0 : 1,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <T style={{ fontSize: 16, flexWrap: "wrap" }}>{props.title}</T>
+          {props.title.length > 0 && (
+            <T style={{ fontSize: 16, marginHorizontal: 4 }}>:</T>
+          )}
+        </View>
+      )}
       <TextInput
         value={props.value}
+        editable={!props.disable}
         onChangeText={props.onChange}
         style={{
           flex: 1,

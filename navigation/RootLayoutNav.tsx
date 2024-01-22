@@ -16,6 +16,7 @@ const RootLayoutNav = () => {
         <Stack.Screen name="(drawers)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ title: "Privacy Policy" }} />
         <Stack.Screen name="create01" />
+        <Stack.Screen name="detail02" options={{ title: "Detail" }} />
       </Stack>
     </ThemeProvider>
   );
