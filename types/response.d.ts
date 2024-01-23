@@ -93,3 +93,53 @@ export type TS02GeneralData = {
   total_pax: number;
   vip_cabin: number;
 };
+
+export type TS02Detail = {
+  total: number;
+  per_page: string;
+  current_page: number;
+  last_page: number;
+  data: TS02Data[];
+};
+
+export type TS02Data = {
+  id: number; //TS02 ID
+  rev_date: string; //製錶日期
+  trips: string; //航次
+  date: string; //日期
+  starting_place: string; //起始地
+  ending_place: string; //目的地
+  generate_time: string; //递纸时间
+  boat_name: string; //船名
+  departure_date: string; //开航日期
+  departure_time: string; //開航時間
+  trip_designation: string; //班次編號
+  crew: string; //船員人數
+  vip_cabin: string; //貴賓廂
+  premier_grand: string; //尊豪位
+  super_class: string; //豪華位
+  economy_class: string; //普通位
+  vip_cabin_complimentary: string; //貴賓廂（赠券）
+  premier_grand_complimentary: string; //尊豪位（赠券）
+  super_class_complimentary: string; //豪華位（赠券）
+  economy_class_complimentary: string; //普通位（赠券）
+  total_pax: string; //总人数
+  crew_for_relieving: string; //額外船員人數
+  group_pax: string; //團體人數
+  baby: string; //嬰兒
+  child: string; //小童
+  dob: string; //遣返人數
+  luggage: string; //行李
+  prepared_by: string; //經手人
+  verified_by: string; //核實人
+  remark: string; //备注
+  createtime: number;
+  updatetime: number;
+  delay_departure_code: string; //離港代碼
+  starting_place_id: number;
+  ending_place_id: number;
+  achieve_time: string; //到达时间
+  generate_time_text: string; //递纸时间
+  departure_time_text: string; //开航时间
+  achieve_time_text: string; //到达时间
+};

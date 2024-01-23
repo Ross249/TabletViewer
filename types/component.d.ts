@@ -144,3 +144,9 @@ export type FilterFormData = RouteData & {
 export type FilterFormProps = FilterFormData & {
   setData: (n: FilterFormData) => void;
 };
+
+export type TS02Header = {
+  start_place: string;
+  end_place: string;
+  departure_date: string;
+};

@@ -7,7 +7,7 @@ import {
   useColorScheme,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View } from "../../../components/Themed";
 import { FilterFormData } from "../../../types/component";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
@@ -19,9 +19,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { TsServices } from "../../../services/Ts.service";
 import Colors from "../../../constants/Colors";
 import { TS02ListData } from "../../../types/response";
+import { Link, useNavigation } from "expo-router";
 const form = () => {
   const theme = useColorScheme();
-  const [loading, setLoading] = useState(false);
   const token = useToken();
   const [filterForm, setFilterForm] = useState<FilterFormData>({
     departure_date: "",
@@ -156,18 +156,33 @@ const form = () => {
                   <Text style={styles.table_text}>
                     {value.generate_time_text}
                   </Text>
-                  <Text
+                  <Link
+                    href={{
+                      pathname: "/detail02",
+                      params: {
+                        id: value.id.toString(),
+                        start_place: value.starting_place,
+                        end_place: value.ending_place,
+                        departure_date: value.date,
+                      },
+                    }}
                     style={{
-                      ...styles.table_text,
-                      textAlign: "center",
                       padding: 8,
-                      color: "white",
+                      ...styles.table_text,
                       borderRadius: 8,
                       backgroundColor: Colors[theme ?? "light"].tint,
                     }}
                   >
-                    Detail
-                  </Text>
+                    <Text
+                      style={{
+                        ...styles.table_text,
+                        textAlign: "center",
+                        color: "white",
+                      }}
+                    >
+                      Detail
+                    </Text>
+                  </Link>
                 </View>
               ))
             )}

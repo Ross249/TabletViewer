@@ -50,4 +50,10 @@ export const TsServices = {
       method: "GET",
       path: `/api/Ts02/index?starting_place=${data.starting_place}&ending_place=${data.ending_place}&departure_date=${data.departure_date}&trip_designation=${data.trip_designation}&page=${data.page}&listRows=10`,
     }),
+
+  getTS02Detail: async (data: { id: string; page: number }) =>
+    await Fetcher({
+      method: "GET",
+      path: `/api/Ts02/view?id=${data.id}&page=${data.page}&listRows=10`,
+    }),
 };
