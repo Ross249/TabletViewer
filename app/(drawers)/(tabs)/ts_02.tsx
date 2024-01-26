@@ -168,16 +168,16 @@ const form = () => {
                     }}
                     style={{
                       padding: 8,
-                      ...styles.table_text,
+                      margin: 4,
                       borderRadius: 8,
                       backgroundColor: Colors[theme ?? "light"].tint,
                     }}
                   >
                     <Text
                       style={{
-                        ...styles.table_text,
                         textAlign: "center",
                         color: "white",
+                        flexWrap: "wrap",
                       }}
                     >
                       Detail

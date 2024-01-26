@@ -17,6 +17,7 @@ const RootLayoutNav = () => {
         <Stack.Screen name="modal" options={{ title: "Privacy Policy" }} />
         <Stack.Screen name="create01" />
         <Stack.Screen name="detail02" options={{ title: "Detail" }} />
+        <Stack.Screen name="detail03" options={{ title: "Detail" }} />
       </Stack>
     </ThemeProvider>
   );

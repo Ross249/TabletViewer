@@ -21,15 +21,15 @@ import { TS02Header } from "../types/component";
 import Colors from "../constants/Colors";
 import { TS02Detail } from "../types/response";
 
-const detail02 = () => {
+const detail03 = () => {
   const params = useLocalSearchParams();
   const theme = useColorScheme();
   const token = useToken();
-  const getTS02Detail = useInfiniteQuery<TS02Detail>({
+  const getTS03Detail = useInfiniteQuery<TS02Detail>({
     initialPageParam: 1,
-    queryKey: ["ts02_detail", params.id],
+    queryKey: ["ts03_detail", params.id],
     queryFn: ({ pageParam }) =>
-      TsServices.getTS02Detail({
+      TsServices.getTS03Detail({
         id: params.id as string,
         page: pageParam as number,
       }),
@@ -57,12 +57,12 @@ const detail02 = () => {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (getTS02Detail.hasNextPage) getTS02Detail.fetchNextPage();
+      if (getTS03Detail.hasNextPage) getTS03Detail.fetchNextPage();
     }
   };
 
   const refresh = () => {
-    getTS02Detail.refetch();
+    getTS03Detail.refetch();
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const detail02 = () => {
         onMomentumScrollEnd={_onMomentumScrollEnd}
         refreshControl={
           <RefreshControl
-            refreshing={getTS02Detail.isFetching}
+            refreshing={getTS03Detail.isFetching}
             onRefresh={refresh}
           />
         }
@@ -135,8 +135,8 @@ const detail02 = () => {
             <Text style={styles.table_head_text}>Delay Departure Code</Text>
             <Text style={styles.table_head_text}>Operate</Text>
           </View>
-          {getTS02Detail.isSuccess &&
-            getTS02Detail.data.pages.map((_item, i) =>
+          {getTS03Detail.isSuccess &&
+            getTS03Detail.data.pages.map((_item, i) =>
               _item.data.map((value, i) => (
                 <View
                   style={{
@@ -225,7 +225,7 @@ const detail02 = () => {
   );
 };
 
-export default detail02;
+export default detail03;
 
 const styles = StyleSheet.create({
   container: {
