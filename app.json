@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "TurboJET",
-    "slug": "TurboJET",
+    "slug": "turbojet",
     "version": "1.0.0",
+    "owener": "yfdev",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -13,8 +14,8 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {},
-    "android": {},
+    "ios": { "bundleIdentifier": "com.turbojet.mobile", "buildNumber": "1" },
+    "android": { "package": "com.turbojet.mobile", "versionCode": 1 },
     "web": {
       "bundler": "metro",
       "output": "static",
@@ -39,6 +40,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aedc31b5-666c-4be6-8824-57820cd2794b"
+      }
     }
   }
 }
