@@ -15,7 +15,7 @@ const DatetimeSelector: React.FC<DatetimeSelectorProps> = (props) => {
 
   return (
     <Pressable
-      disabled={userInfo.group_id > 1}
+      disabled={props.disable}
       style={{
         width: props.title.length > 0 ? "49%" : "100%",
         flexDirection: "row",

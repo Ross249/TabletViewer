@@ -3,7 +3,7 @@
     "name": "TurboJET",
     "slug": "turbojet",
     "version": "1.0.0",
-    "owener": "yfdev",
+    "owener": "jimmyluo",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -43,7 +43,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "aedc31b5-666c-4be6-8824-57820cd2794b"
+        "projectId": "084b2d05-9d44-411a-8205-c3e057ca8768"
       }
     }
   }
