@@ -8,7 +8,8 @@
       "android": {
         "buildType": "apk",
         "distribution": "internal"
-      }
+      },
+      "env": { "EXPO_PUBLIC_API_URL": "https://turbojet.originalcake-hk.com" }
     },
     "dev_client": {
       "developmentClient": true,
@@ -17,7 +18,8 @@
         "distribution": "internal"
       },
       "env": {
-        "ANDROID_SDK_ROOT": "~/android"
+        "ANDROID_SDK_ROOT": "~/android",
+        "EXPO_PUBLIC_API_URL": "https://turbojet.originalcake-hk.com"
       },
       "ios": {
         "simulator": true,
@@ -26,7 +28,8 @@
     },
     "production": {
       "env": {
-        "ANDROID_SDK_ROOT": "~/android"
+        "ANDROID_SDK_ROOT": "~/android",
+        "EXPO_PUBLIC_API_URL": "https://turbojet.originalcake-hk.com"
       },
       "ios": {
         "resourceClass": "m-medium"
