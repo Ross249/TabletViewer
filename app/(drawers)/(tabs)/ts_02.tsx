@@ -20,8 +20,10 @@ import { TsServices } from "../../../services/Ts.service";
 import Colors from "../../../constants/Colors";
 import { TS02ListData } from "../../../types/response";
 import { Link, useFocusEffect, useNavigation } from "expo-router";
+import { useIsFocused } from "@react-navigation/native";
 const form = () => {
   const theme = useColorScheme();
+  const isFocus = useIsFocused();
   const token = useToken();
   const [filterForm, setFilterForm] = useState<FilterFormData>({
     departure_date: "",
@@ -87,8 +89,8 @@ const form = () => {
 
   useFocusEffect(
     useCallback(() => {
-      get_or_search_ts02.refetch();
-    }, [])
+      isFocus && refresh();
+    }, [isFocus])
   );
 
   return (

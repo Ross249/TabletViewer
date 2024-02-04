@@ -20,10 +20,12 @@ import CusDetailHeader from "../components/CusDetailHeader";
 import { TS02Header } from "../types/component";
 import Colors from "../constants/Colors";
 import { TS02Detail } from "../types/response";
+import { useIsFocused } from "@react-navigation/native";
 
 const detail02 = () => {
   const params = useLocalSearchParams();
   const theme = useColorScheme();
+  const isFocus = useIsFocused();
   const token = useToken();
   const getTS02Detail = useInfiniteQuery<TS02Detail>({
     initialPageParam: 1,
@@ -64,7 +66,11 @@ const detail02 = () => {
     getTS02Detail.refetch();
   };
 
-  useFocusEffect(useCallback(() => refresh(), []));
+  useFocusEffect(
+    useCallback(() => {
+      isFocus && refresh();
+    }, [isFocus])
+  );
 
   return (
     <View style={styles.container}>

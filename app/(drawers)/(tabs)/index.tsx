@@ -24,8 +24,10 @@ import { TS01ListData } from "../../../types/response";
 import { TsServices } from "../../../services/Ts.service";
 import { useCallback, useEffect } from "react";
 import TS01Card from "../../../components/TS01Card";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function HomeScreen() {
+  const isFocus = useIsFocused();
   const theme = useColorScheme();
   const userInfo = useUserInfo();
   const token = useToken();
@@ -34,7 +36,7 @@ export default function HomeScreen() {
     queryFn: ({ pageParam }) => TsServices.get_ts01_list(pageParam as number),
     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
       console.log(
-        `lastPage: ${lastPage?.current_page} allPages: ${allPages?.length} lastPageParam: ${lastPageParam} allPageParams: ${allPageParams.length}`
+        `lastPage: ${lastPage?.current_page} allPages: ${allPages?.length} lastPageParam: ${lastPageParam} allPageParams: ${allPageParams.length} total:${lastPage.total}`
       );
 
       if (!token) {
@@ -66,8 +68,8 @@ export default function HomeScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      !!token && refresh();
-    }, [])
+      isFocus && refresh();
+    }, [isFocus])
   );
 
   return (
