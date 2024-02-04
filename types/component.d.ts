@@ -59,7 +59,7 @@ export type TS01B = {
 };
 
 export type CrewData = {
-  id: number;
+  id: number | string;
   group_id: number;
   username: string;
   group_name: string;

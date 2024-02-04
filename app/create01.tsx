@@ -74,7 +74,7 @@ const create01 = () => {
     dob: params.tag === "edit" ? (params.dob as string) : "",
     luggage: params.tag === "edit" ? (params.luggage as string) : "",
     prepared_by: {
-      id: params.tag === "edit" ? parseInt(params.prepared_by_id as any) : 0,
+      id: params.tag === "edit" ? (params.prepared_by_id as any) : 0,
       group_id: 0,
       group_name: "",
       username: params.tag === "edit" ? (params.prepared_by as string) : "",
@@ -118,9 +118,9 @@ const create01 = () => {
         return await createTS01.mutateAsync(
           {
             starting_place_id: route.from.id.toString(),
-            starting_place: route.from.name,
+            starting_place: route.from.name_en,
             ending_place_id: route.to.id.toString(),
-            ending_place: route.to.name,
+            ending_place: route.to.name_en,
             boat_name: formCaptin.vessel_name,
             departure_date: formCaptin.departure_date,
             departure_time: formCaptin.departure_time,
