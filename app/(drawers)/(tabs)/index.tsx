@@ -13,7 +13,7 @@ import {
 
 import { Text, View as V } from "../../../components/Themed";
 import { useAuthStore, useToken, useUserInfo } from "../../../store/AuthStore";
-import { Link } from "expo-router";
+import { Link, useFocusEffect } from "expo-router";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
 import { generalStyles } from "../../../constants/GeneralStyles";
 import CusHeader from "../../../components/CusHeader";
@@ -45,7 +45,6 @@ export default function HomeScreen() {
           : lastPage.current_page + 1;
       }
     },
-    refetchOnWindowFocus: true,
     initialPageParam: 1,
     enabled: !!token,
   });
@@ -64,6 +63,12 @@ export default function HomeScreen() {
   const refresh = () => {
     getTSO1Lists.refetch();
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      !!token && refresh();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>

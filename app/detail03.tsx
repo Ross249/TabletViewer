@@ -8,8 +8,8 @@ import {
   View,
   useColorScheme,
 } from "react-native";
-import React, { useEffect } from "react";
-import { Link, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useEffect } from "react";
+import { Link, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { Text as T } from "../components/Themed";
 import { generalStyles } from "../constants/GeneralStyles";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -65,9 +65,7 @@ const detail03 = () => {
     getTS03Detail.refetch();
   };
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
+  useFocusEffect(useCallback(() => refresh(), []));
 
   return (
     <View style={styles.container}>

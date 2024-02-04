@@ -8,8 +8,8 @@ import {
   View,
   useColorScheme,
 } from "react-native";
-import React, { useEffect } from "react";
-import { Link, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useEffect } from "react";
+import { Link, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { Text as T } from "../components/Themed";
 import { generalStyles } from "../constants/GeneralStyles";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -46,7 +46,6 @@ const detail02 = () => {
           : lastPage.current_page + 1;
       }
     },
-    refetchOnWindowFocus: true,
     enabled: !!token,
   });
 
@@ -65,9 +64,7 @@ const detail02 = () => {
     getTS02Detail.refetch();
   };
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
+  useFocusEffect(useCallback(() => refresh(), []));
 
   return (
     <View style={styles.container}>

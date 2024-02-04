@@ -7,6 +7,9 @@ import moment from "moment";
 import PreparedBySelector from "./PreparedBySelector";
 
 const TS01FormB: React.FC<TS01BProps> = (props) => {
+  console.log(`prepared by : ${props.prepared_by.id}`);
+  console.log(`date: ${props.submitted_at}`);
+
   return (
     <View>
       <View

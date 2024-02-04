@@ -7,7 +7,7 @@ import {
   useColorScheme,
   Pressable,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Text, View } from "../../../components/Themed";
 import { FilterFormData } from "../../../types/component";
 import LinearGradientBackground from "../../../components/LinearGradientBackground";
@@ -19,7 +19,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { TsServices } from "../../../services/Ts.service";
 import Colors from "../../../constants/Colors";
 import { TS02ListData } from "../../../types/response";
-import { Link, useNavigation } from "expo-router";
+import { Link, useFocusEffect, useNavigation } from "expo-router";
 const form = () => {
   const theme = useColorScheme();
   const token = useToken();
@@ -66,7 +66,6 @@ const form = () => {
           : lastPage.current_page + 1;
       }
     },
-    refetchOnWindowFocus: true,
     initialPageParam: 1,
     enabled: !!token,
   });
@@ -85,6 +84,12 @@ const form = () => {
   const refresh = () => {
     get_or_search_ts02.refetch();
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      get_or_search_ts02.refetch();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
