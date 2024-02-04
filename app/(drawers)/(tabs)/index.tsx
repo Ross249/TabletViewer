@@ -58,7 +58,12 @@ export default function HomeScreen() {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (getTSO1Lists.hasNextPage) getTSO1Lists.fetchNextPage();
+      if (
+        getTSO1Lists.data?.pages[getTSO1Lists.data.pages.length - 1].is_more !==
+          0 &&
+        getTSO1Lists.hasNextPage
+      )
+        getTSO1Lists.fetchNextPage().catch();
     }
   };
 

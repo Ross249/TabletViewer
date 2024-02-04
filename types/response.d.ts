@@ -19,6 +19,7 @@ export type TS01ListData = {
   per_page: string;
   current_page: number;
   last_page: number;
+  is_more: 0 | 1;
   data: TS01Data[];
 };
 
@@ -75,6 +76,7 @@ export type TS02ListData = {
   per_page: string;
   current_page: number;
   last_page: number;
+  is_more: 0 | 1;
   data: TS02GeneralData[];
 };
 
@@ -99,6 +101,7 @@ export type TS02Detail = {
   per_page: string;
   current_page: number;
   last_page: number;
+  is_more: 0 | 1;
   data: TS02Data[];
 };
 

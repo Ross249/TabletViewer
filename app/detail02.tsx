@@ -58,7 +58,12 @@ const detail02 = () => {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (getTS02Detail.hasNextPage) getTS02Detail.fetchNextPage();
+      if (
+        getTS02Detail.data?.pages[getTS02Detail.data.pages.length - 1]
+          .is_more !== 0 &&
+        getTS02Detail.hasNextPage
+      )
+        getTS02Detail.fetchNextPage();
     }
   };
 

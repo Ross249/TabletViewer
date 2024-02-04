@@ -59,7 +59,12 @@ const detail03 = () => {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (getTS03Detail.hasNextPage) getTS03Detail.fetchNextPage();
+      if (
+        getTS03Detail.data?.pages[getTS03Detail.data.pages.length - 1]
+          .is_more !== 0 &&
+        getTS03Detail.hasNextPage
+      )
+        getTS03Detail.fetchNextPage();
     }
   };
 

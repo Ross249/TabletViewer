@@ -79,7 +79,12 @@ const form = () => {
       nativeEvent.layoutMeasurement.height + nativeEvent.contentOffset.y >
       nativeEvent.contentSize.height - 30;
     if (isCloseToBottom) {
-      if (get_or_search_ts02.hasNextPage) get_or_search_ts02.fetchNextPage();
+      if (
+        get_or_search_ts02.data?.pages[get_or_search_ts02.data.pages.length - 1]
+          .is_more !== 0 &&
+        get_or_search_ts02.hasNextPage
+      )
+        get_or_search_ts02.fetchNextPage();
     }
   };
 
