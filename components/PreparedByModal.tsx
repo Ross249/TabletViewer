@@ -8,7 +8,7 @@ import {
   View,
   useColorScheme,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CrewData, PreparedProps } from "../types/component";
 import { TsServices } from "../services/Ts.service";
 import { useQuery } from "@tanstack/react-query";
@@ -19,7 +19,7 @@ import { Feather } from "@expo/vector-icons";
 
 const PreparedByModal: React.FC<PreparedProps> = (props) => {
   const theme = useColorScheme();
-  const [selected, setSelected] = useState<CrewData>();
+  const [selected, setSelected] = useState<CrewData>({ ...props.data });
   const vesselList = useQuery<CrewData[]>({
     queryKey: ["staff_list"],
     queryFn: TsServices.getStaffList,
@@ -27,7 +27,13 @@ const PreparedByModal: React.FC<PreparedProps> = (props) => {
   const confirm = () => {
     if (selected) {
       props.setData(selected);
-      setSelected(undefined);
+      setSelected({
+        id: 0,
+        group_name: "",
+        group_id: 0,
+        url: "",
+        username: "",
+      });
       props.setShow(false);
     }
   };
@@ -110,7 +116,7 @@ const PreparedByModal: React.FC<PreparedProps> = (props) => {
                     }}
                   >
                     <T style={styles.card_font}>{item.username}</T>
-                    {selected?.id === item.id ? (
+                    {selected?.id == item.id ? (
                       <View style={{ marginLeft: 24 }}>
                         <Feather
                           name="check-square"

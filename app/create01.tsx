@@ -142,7 +142,10 @@ const create01 = () => {
             child: formStaff.child,
             dob: formStaff.dob,
             luggage: formStaff.luggage,
-            prepared_by_id: formStaff.prepared_by.id.toString(),
+            prepared_by_id:
+              typeof formStaff.prepared_by.id === "string"
+                ? formStaff.prepared_by.id
+                : formStaff.prepared_by.id.toString(),
             generate_time: formStaff.submitted_at,
             achieve_time: formStaff.arrived_at,
             remark: formStaff.remarks,
@@ -193,7 +196,10 @@ const create01 = () => {
             child: formStaff.child,
             dob: formStaff.dob,
             luggage: formStaff.luggage,
-            prepared_by_id: formStaff.prepared_by.id.toString(),
+            prepared_by_id:
+              typeof formStaff.prepared_by.id === "string"
+                ? formStaff.prepared_by.id
+                : formStaff.prepared_by.id.toString(),
             generate_time: formStaff.submitted_at,
             achieve_time: formStaff.arrived_at,
             remark: formStaff.remarks,

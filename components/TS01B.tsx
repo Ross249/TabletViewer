@@ -7,8 +7,6 @@ import moment from "moment";
 import PreparedBySelector from "./PreparedBySelector";
 
 const TS01FormB: React.FC<TS01BProps> = (props) => {
-  console.log(`prepared by : ${props.prepared_by.id}`);
-
   return (
     <View style={{ borderTopWidth: 1, borderColor: "rgba(0,0,0,0.2)" }}>
       <View

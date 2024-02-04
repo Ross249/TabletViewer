@@ -45,7 +45,7 @@ const PreparedBySelector: React.FC<PreparedSelectorProps> = (props) => {
         <PreparedByModal
           show={show}
           setShow={setShow}
-          data={props.values}
+          data={props.value}
           setData={props.onChange}
         />
       </View>
