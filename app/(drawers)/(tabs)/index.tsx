@@ -99,7 +99,6 @@ export default function HomeScreen() {
             <TS01Card {..._data} key={_data.id} />
           ))
         )}
-        <Text>{token}</Text>
       </ScrollView>
     </View>
   );
