@@ -101,7 +101,7 @@ const detail03 = () => {
             borderWidth: 1,
           }}
           contentContainerStyle={{
-            width: 30 * 60,
+            width: 31 * 60,
             flexWrap: "wrap",
             padding: 8,
           }}
@@ -143,6 +143,7 @@ const detail03 = () => {
             <Text style={styles.table_head_text}>Remark</Text>
             <Text style={styles.table_head_text}>Delay Departure Code</Text>
             <Text style={styles.table_head_text}>Operate</Text>
+            <Text style={styles.table_head_text}>History</Text>
           </View>
           {getTS03Detail.isSuccess &&
             getTS03Detail.data.pages.map((_item, i) =>
@@ -205,7 +206,7 @@ const detail03 = () => {
                         starting_place_id: value.starting_place_id.toString(),
                         starting_place: params.start_place,
                         ending_place: params.end_place,
-                      },
+                      } as any,
                     }}
                     style={{
                       padding: 8,
@@ -225,6 +226,16 @@ const detail03 = () => {
                       Edit
                     </Text>
                   </Link>
+                  <View style={styles.table_text}>
+                    {value.logs.length > 0 &&
+                      value.logs.map((_value, i) => (
+                        <Text style={{ ...styles.table_text, fontSize: 12 }}>
+                          {`${i + 1} - ${_value.username}:${
+                            _value.create_time_format
+                          }`}
+                        </Text>
+                      ))}
+                  </View>
                 </View>
               ))
             )}

@@ -145,4 +145,15 @@ export type TS02Data = {
   generate_time_text: string; //递纸时间
   departure_time_text: string; //开航时间
   achieve_time_text: string; //到达时间
+  logs: ModifiedHistoryData[];
+};
+
+export type ModifiedHistoryData = {
+  id: number; //ID
+  title: string; //标题
+  user_id: number; //操作人 ID
+  username: string; //操作人名称
+  ts01_id: number;
+  create_time_format: string;
+  ip: string; //IP
 };
