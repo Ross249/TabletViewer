@@ -134,6 +134,7 @@ export type TS02Data = {
   dob: string; //遣返人數
   luggage: string; //行李
   prepared_by: string; //經手人
+  prepared_by_id: string;
   verified_by: string; //核實人
   remark: string; //备注
   createtime: number;

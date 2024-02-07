@@ -153,7 +153,7 @@ const detail02 = () => {
                     borderTopColor: "rgba(0,0,0,0.2)",
                     borderTopWidth: 1,
                   }}
-                  key={value.id}
+                  key={`TS02-${value.id}`}
                 >
                   <Text style={styles.table_text}>
                     {value.trip_designation}
@@ -200,7 +200,7 @@ const detail02 = () => {
                       params: {
                         tag: "edit",
                         ...value,
-                        id: value.id.toString(),
+                        id: value.trips,
                         ending_place_id: value.ending_place_id.toString(),
                         starting_place_id: value.starting_place_id.toString(),
                         starting_place: params.start_place,

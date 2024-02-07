@@ -17,6 +17,7 @@ import Tag from "./Tag";
 
 const TS01Card: React.FC<TS01Data> = (props) => {
   const theme = useColorScheme();
+  console.log(`total crew: ${props.total_crew}`);
 
   return (
     <BlurView

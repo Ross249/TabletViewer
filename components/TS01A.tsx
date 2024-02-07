@@ -33,6 +33,8 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
   const [vesselModal, setVesselModal] = useState(false);
   const userInfo = useUserInfo();
 
+  console.log(`total crew: ${props.total_number_of_crew}`);
+
   return (
     <View>
       <View
