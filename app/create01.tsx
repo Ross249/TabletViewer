@@ -153,6 +153,7 @@ const create01 = () => {
             remark: formStaff.remarks,
             delay_departure_code: formStaff.delay_departure_code,
             tag_through_luggage: formStaff.tag_through_luggage,
+            total_crew: formCaptin.total_number_of_crew,
           },
           {
             onError: (e) => {
@@ -208,6 +209,7 @@ const create01 = () => {
             remark: formStaff.remarks,
             delay_departure_code: formStaff.delay_departure_code,
             tag_through_luggage: formStaff.tag_through_luggage,
+            total_crew: formCaptin.total_number_of_crew,
           },
           {
             onError: (e) => {
