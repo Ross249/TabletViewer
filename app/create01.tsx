@@ -88,6 +88,8 @@ const create01 = () => {
     delay_departure_code:
       params.tag === "edit" ? (params.delay_departure_code as string) : "",
     remarks: params.tag === "edit" ? (params.remark as string) : "",
+    tag_through_luggage:
+      params.tag === "edit" ? (params.tag_through_luggage as string) : "",
   });
   const [route, setRoute] = useState<RouteData>({
     from: {
@@ -150,6 +152,7 @@ const create01 = () => {
             achieve_time: formStaff.arrived_at,
             remark: formStaff.remarks,
             delay_departure_code: formStaff.delay_departure_code,
+            tag_through_luggage: formStaff.tag_through_luggage,
           },
           {
             onError: (e) => {
@@ -204,6 +207,7 @@ const create01 = () => {
             achieve_time: formStaff.arrived_at,
             remark: formStaff.remarks,
             delay_departure_code: formStaff.delay_departure_code,
+            tag_through_luggage: formStaff.tag_through_luggage,
           },
           {
             onError: (e) => {
@@ -275,7 +279,7 @@ const create01 = () => {
             onPress={() => create_and_submite(params.tag as string)}
           >
             <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {params.tag === "create" ? "Create" : "Submit"}
+              {"Submit"}
             </Text>
           </Pressable>
         </View>

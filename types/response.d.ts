@@ -69,6 +69,7 @@ export type TS01Data = {
   generate_time_text: string; //遞紙時間
   departure_time_text: string; //開航時間
   estimated_achieve_time_text: string; //预计达到时间
+  tag_through_luggage: string;
 };
 
 export type TS02ListData = {

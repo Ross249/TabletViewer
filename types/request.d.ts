@@ -39,6 +39,7 @@ export type CreateTS01Data = {
   achieve_time: string;
   remark: string;
   delay_departure_code: string;
+  tag_through_luggage: string;
 };
 
 export type UpdateTS01Data = CreateTS01Data & { id: string };

@@ -17,7 +17,6 @@ import Tag from "./Tag";
 
 const TS01Card: React.FC<TS01Data> = (props) => {
   const theme = useColorScheme();
-  console.log(`total crew: ${props.total_crew}`);
 
   return (
     <BlurView
@@ -119,17 +118,19 @@ const TS01Card: React.FC<TS01Data> = (props) => {
           </Text>
         </View>
 
-        <View style={styles.card_row_container}>
-          <Text
+        <View
+          style={{ ...styles.card_row_container, justifyContent: "center" }}
+        >
+          {/* <Text
             style={{
               ...styles.card_commute_text,
               fontSize: 12,
             }}
           >
             {props.departure_time_text}
-          </Text>
+          </Text> */}
           <Text style={{ fontSize: 16 }}>{props.trip_designation}</Text>
-          <Text
+          {/* <Text
             style={{
               ...styles.card_commute_text,
               textAlign: "right",
@@ -137,13 +138,13 @@ const TS01Card: React.FC<TS01Data> = (props) => {
             }}
           >
             {props.achieve_time_text}
-          </Text>
+          </Text> */}
         </View>
       </View>
 
-      <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 4 }}>
+      {/* <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 4 }}>
         {props.duration}
-      </Text>
+      </Text> */}
       {
         // customer info
       }

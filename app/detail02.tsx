@@ -113,7 +113,7 @@ const detail02 = () => {
             <Text style={styles.table_head_text}>Trip Designation</Text>
             <Text style={styles.table_head_text}>Vessel Name</Text>
             <Text style={styles.table_head_text}>Departure Time</Text>
-            <Text style={styles.table_head_text}>Arrive Time</Text>
+            <Text style={styles.table_head_text}>Arrival Time</Text>
             <Text style={styles.table_head_text}>Economy Class</Text>
             <Text style={styles.table_head_text}>Super Class</Text>
             <Text style={styles.table_head_text}>Premier Grand</Text>

@@ -132,9 +132,9 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
           }}
         />
 
-        <DatetimeSelector
+        {/* <DatetimeSelector
           disable={userInfo.group_id > 1}
-          title="Estimated Arrive Time"
+          title="Estimated Arrival Time"
           type="time"
           value={props.estimated_arrive_time}
           onChange={(date) => {
@@ -146,7 +146,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
               };
             });
           }}
-        />
+        /> */}
 
         <CusInput
           disable={userInfo.group_id > 1}

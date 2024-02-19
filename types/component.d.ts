@@ -56,6 +56,7 @@ export type TS01B = {
 
   delay_departure_code: string;
   remarks: string;
+  tag_through_luggage: string;
 };
 
 export type CrewData = {

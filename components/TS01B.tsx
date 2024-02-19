@@ -221,7 +221,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
 
         <DatetimeSelector
           disable={false}
-          title="Arrive Time"
+          title="Arrival Time"
           type="time"
           value={props.arrived_at}
           onChange={(date) => {
@@ -234,8 +234,21 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
             });
           }}
         />
-
-        <DatetimeSelector
+        <CusInput
+          disable={false}
+          value={props.tag_through_luggage}
+          onChange={(text) => {
+            // @ts-ignore
+            props.setData((prev: TS01B) => {
+              return {
+                ...(prev as TS01B),
+                tag_through_luggage: text,
+              };
+            });
+          }}
+          title={"Tag-through Luggage"}
+        />
+        {/* <DatetimeSelector
           disable={false}
           title="Submit Time"
           type="time"
@@ -249,7 +262,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-        />
+        /> */}
         <PreparedBySelector
           title="Prepared By"
           value={props.prepared_by}
