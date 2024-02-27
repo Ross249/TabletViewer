@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tag_text: {
-    fontSize: 12,
+    fontSize: 20,
   },
 });

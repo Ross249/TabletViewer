@@ -52,7 +52,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
             gap: 8,
           }}
         >
-          <T style={{ fontSize: 24, fontWeight: "bold" }}>Route:</T>
+          <T style={{ fontSize: 24, fontWeight: "bold" }}>*Route:</T>
           <Pressable
             disabled={userInfo.group_id > 1}
             style={{
@@ -102,7 +102,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
       >
         <DatetimeSelector
           disable={userInfo.group_id > 1}
-          title="Departure Date"
+          title="*Departure Date"
           type="date"
           value={props.departure_date}
           onChange={(date) => {
@@ -118,7 +118,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
 
         <DatetimeSelector
           disable={userInfo.group_id > 1}
-          title="Departure Time"
+          title="*Departure Time"
           type="time"
           value={props.departure_time}
           onChange={(date) => {
@@ -160,7 +160,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
               };
             });
           }}
-          title="Vessel Name"
+          title="*Vessel Name"
         />
         <CusInput
           disable={userInfo.group_id > 1}
@@ -174,7 +174,7 @@ const TS01FormA: React.FC<TS01AProps> = (props) => {
               };
             });
           }}
-          title="Trip Designation"
+          title="*Trip Designation"
         />
         <CusInput
           disable={userInfo.group_id > 1}

@@ -31,7 +31,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"VIP Cabin"}
+          title={"*VIP Cabin"}
           rate={props.vip_cabin_rate}
         />
         <CusInput
@@ -46,7 +46,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"VIP Cabin Complimentary"}
+          title={"*VIP Cabin Complimentary"}
           rate={props.vip_cabin_rate}
         />
 
@@ -62,7 +62,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Premier Grand"}
+          title={"*Premier Grand"}
           rate={props.premier_grand_rate}
         />
 
@@ -78,7 +78,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Premier Grand Complimentary"}
+          title={"*Premier Grand Complimentary"}
           rate={props.premier_grand_rate}
         />
 
@@ -94,7 +94,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Super Class"}
+          title={"*Super Class"}
           rate={props.super_class_rate}
         />
         <CusInput
@@ -109,7 +109,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Super Class Complimentary"}
+          title={"*Super Class Complimentary"}
           rate={props.super_class_rate}
         />
 
@@ -125,7 +125,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Economy Class"}
+          title={"*Economy Class"}
           rate={props.economy_class_rate}
         />
 
@@ -141,13 +141,42 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Economy Class Complimentary"}
+          title={"*Economy Class Complimentary"}
           rate={props.economy_class_rate}
         />
 
         <CusInput
-          disable={false}
-          value={props.total_pax}
+          disable={true}
+          value={(
+            parseInt(props.vip_cabin.length > 0 ? props.vip_cabin : "0") +
+            parseInt(
+              props.vip_cabin_complimentary.length > 0
+                ? props.vip_cabin_complimentary
+                : "0"
+            ) +
+            parseInt(
+              props.premier_grand.length > 0 ? props.premier_grand : "0"
+            ) +
+            parseInt(
+              props.premier_grand_complimentary.length > 0
+                ? props.premier_grand_complimentary
+                : "0"
+            ) +
+            parseInt(props.super_class.length > 0 ? props.super_class : "0") +
+            parseInt(
+              props.super_class_complimentary.length > 0
+                ? props.super_class_complimentary
+                : "0"
+            ) +
+            parseInt(
+              props.economy_class.length > 0 ? props.economy_class : "0"
+            ) +
+            parseInt(
+              props.economy_class_complimentary.length > 0
+                ? props.economy_class_complimentary
+                : "0"
+            )
+          ).toString()}
           onChange={(text) => {
             // @ts-ignore
             props.setData((prev: TS01B) => {
@@ -157,7 +186,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
               };
             });
           }}
-          title={"Total No. of Pax"}
+          title={"*Total No. of Pax"}
         />
 
         <CusInput
@@ -264,7 +293,7 @@ const TS01FormB: React.FC<TS01BProps> = (props) => {
           }}
         /> */}
         <PreparedBySelector
-          title="Prepared By"
+          title="*Prepared By"
           value={props.prepared_by}
           onChange={(new_crew: CrewData) => {
             // @ts-ignore

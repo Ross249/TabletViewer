@@ -33,7 +33,7 @@ const TS01Card: React.FC<TS01Data> = (props) => {
           source={require("../assets/images/logo.png")}
           style={{ width: "20%", resizeMode: "contain" }}
         />
-        <Text style={styles.card_header_title}>Scheduled TS-01</Text>
+        <Text style={styles.card_header_title}>{props.departure_time}</Text>
         <Link
           href={{
             pathname: "/create01",
@@ -121,14 +121,16 @@ const TS01Card: React.FC<TS01Data> = (props) => {
         <View
           style={{ ...styles.card_row_container, justifyContent: "center" }}
         >
-          {/* <Text
+          <Text
             style={{
               ...styles.card_commute_text,
               fontSize: 12,
+              position: "absolute",
+              left: 0,
             }}
           >
-            {props.departure_time_text}
-          </Text> */}
+            {props.achieve_time_text}
+          </Text>
           <Text style={{ fontSize: 16 }}>{props.trip_designation}</Text>
           {/* <Text
             style={{
@@ -142,9 +144,9 @@ const TS01Card: React.FC<TS01Data> = (props) => {
         </View>
       </View>
 
-      {/* <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 4 }}>
-        {props.duration}
-      </Text> */}
+      <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 4 }}>
+        {props.generate_time_text}
+      </Text>
       {
         // customer info
       }
@@ -166,7 +168,7 @@ const TS01Card: React.FC<TS01Data> = (props) => {
             props.premier_grand.length > 0 ||
             props.super_class.length > 0 ||
             props.economy_class.length > 0) && (
-            <T style={{ fontSize: 16, fontWeight: "bold" }}>
+            <T style={{ fontSize: 24, fontWeight: "bold" }}>
               No. of Pax./ Complimentary:
             </T>
           )}
@@ -249,6 +251,15 @@ const TS01Card: React.FC<TS01Data> = (props) => {
             )}
           </View>
         </View>
+        {props.remark.length > 0 && (
+          <View style={styles.info_gap}>
+            <T style={{ fontSize: 24, fontWeight: "bold" }}>Remarks:</T>
+
+            <View style={styles.tag_wrap}>
+              <T style={{ fontSize: 20 }}>{props.remark}</T>
+            </View>
+          </View>
+        )}
       </View>
     </BlurView>
   );
@@ -300,7 +311,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tag_text: {
-    fontSize: 12,
+    fontSize: 20,
   },
   tag_wrap: {
     flexDirection: "row",
